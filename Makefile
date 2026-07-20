@@ -2,7 +2,7 @@
 
 all: refresh queries
 
-refresh: population employment urbanismo tourism renta atestados geografia
+refresh: population employment urbanismo tourism renta atestados geografia poblacion_secciones
 
 population:
 	python3 ingest/istac_population.py
@@ -26,6 +26,9 @@ atestados:
 
 geografia:
 	python3 ingest/fetch_geografia_wfs.py
+
+poblacion_secciones:
+	python3 ingest/fetch_poblacion_secciones.py
 
 queries:
 	python3 ingest/run_queries.py
