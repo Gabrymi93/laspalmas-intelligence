@@ -4,6 +4,9 @@
   "codigo_ine": "35016",
   "nuts3": "ES704",
   "ultima_actualizacion": "2026-07-20",
+  "total_datasets": 24,
+  "total_queries": 25,
+  "total_ingest_scripts": 12,
   "sources": [
     {
       "id": "istac",
@@ -165,6 +168,26 @@
       "granularity": "seccion censal",
       "years": "2022",
       "note": "275 secciones LPGC. Geometría, vinculable con renta via geocode",
+      "updated": "2026"
+    },
+    "sitycleta": {
+      "source": "comune",
+      "id": "704bc902-015d-4832-871b-0fef344efed2",
+      "title": "Localización de estaciones de préstamo de bicicletas",
+      "granularity": "estacion",
+      "years": "2018",
+      "measures": ["Nombre", "Calle", "Latitud", "Longitud"],
+      "note": "11 estaciones historicas. Datos 2026 no descargables (ckan interno)",
+      "updated": "2018"
+    },
+    "poblacion_secciones": {
+      "source": "istac",
+      "id": "WFS Indicadores Demograficos Secciones-20220101",
+      "title": "Indicadores demográficos por secciones censales de Canarias",
+      "granularity": "seccion censal",
+      "years": "2022",
+      "measures": ["poblacion", "poblacion_hombres", "poblacion_mujeres", "poblacion_00a14", "poblacion_15a64", "poblacion_65mas", "poblacion_extranjera", "poblacion_nacida_canarias", "superficie"],
+      "note": "275 secciones LPGC. Permite normalizar renta per capita",
       "updated": "2026"
     },
     "atestados_accidentes": {
