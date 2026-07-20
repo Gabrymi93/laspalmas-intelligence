@@ -27,6 +27,11 @@ Repositorio OSINT para centralizar datos HVD de **Las Palmas de Gran Canaria**.
 | Turismo | Ocupación hotelera | 144 | 2009-2026 | LPGC + categoría | ISTAC |
 | Turismo | Pernoctaciones | 197 | 2010-2026 | Gran Canaria, mensual | ISTAC |
 | Turismo | Gasto turístico | 96 | 2010-2017 | Canarias, por país | ISTAC |
+| Economía | Renta bruta por municipio | 45 | 2015-2023 | LPGC por fuente | ISTAC |
+| Economía | Renta bruta por sección censal | 12.395 | 2015-2023 | 281 secciones LPGC | ISTAC |
+| Seguridad | Atestados accidentes | 76.178 | 1998-2016 | LPGC, calle | Ayto LPGC |
+| Seguridad | Atestados heridos | 45.488 | 1998-2016 | LPGC, edad/sexo/gravedad | Ayto LPGC |
+| Seguridad | Atestados vehículos | 148.650 | 1998-2016 | LPGC, marca/modelo | Ayto LPGC |
 | Urbanismo | PGO Plan General | 6.608 | 2012 | poligono (ZUSO) | SITCAN |
 | Urbanismo | PGO catalogación | 821 | 2012 | elemento protegido | SITCAN |
 | Urbanismo | Planes parciales | 28 planes GIS | 1994-2024 | poligono (ZUSO) | SITCAN |
@@ -70,3 +75,6 @@ make status    # resumen de datasets y filas
 - **Stops GTFS** (coordenadas de paradas — 403 bloqueado, alternativa OSM o scraping)
 - **Eurostat NUTS-3** (PIL, GVA, crimen ES704 como contexto provincial)
 - **Callejero municipal** (base geoespacial, 15 recursos)
+- **Sitycleta/Moxsi** (bike sharing stations, ya catalogado)
+- **Centros educativos** (ISTAC, geolocalizados)
+- **Analítica urbana** (conteo personas mercados, live)

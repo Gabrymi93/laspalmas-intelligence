@@ -3,7 +3,7 @@
   "municipio": "Las Palmas de Gran Canaria",
   "codigo_ine": "35016",
   "nuts3": "ES704",
-  "ultima_actualizacion": "2026-07-17",
+  "ultima_actualizacion": "2026-07-20",
   "sources": [
     {
       "id": "istac",
@@ -117,6 +117,36 @@
       "granularity": "particella",
       "resources": 127,
       "note": "PGO, PEPRI, piani parziali, sentenze. ZIP con SHP."
+    },
+    "renta_municipio": {
+      "source": "istac",
+      "id": "ISTAC/E30325A_000002",
+      "title": "Distribución de la renta bruta media por persona según fuente de ingresos. Municipios",
+      "granularity": "municipio",
+      "years": "2015-2023",
+      "measures": ["SUELDOS_SALARIOS", "PENSIONES", "PRESTACIONES_DESEMPLEO", "OTROS_INGRESOS", "OTRAS_PRESTACIONES"],
+      "note": "Porcentaje de composición de la renta por fuente",
+      "updated": "2026-07-15"
+    },
+    "renta_secciones": {
+      "source": "istac",
+      "id": "ISTAC/E30325A_000045",
+      "title": "Distribución de la renta bruta media por persona según fuente de ingresos. Secciones censales",
+      "granularity": "seccion censal",
+      "years": "2015-2023",
+      "measures": ["SUELDOS_SALARIOS", "PENSIONES", "PRESTACIONES_DESEMPLEO", "OTROS_INGRESOS", "OTRAS_PRESTACIONES"],
+      "note": "281 secciones en LPGC, 5 distritos. Mismas medidas que municipio",
+      "updated": "2026-07-15"
+    },
+    "atestados_accidentes": {
+      "source": "comune",
+      "id": "atestados-policia-local",
+      "title": "Atestados Policía Local — Accidentes con lesividad",
+      "granularity": "accidente",
+      "years": "1998-2016",
+      "measures": ["DILIG", "LUGAR", "FECHA", "HORA", "VEHICULOS", "HERIDOS", "DESTINO", "COLISION"],
+      "note": "76.178 accidentes, 45.488 heridos, 148.650 vehículos. Vinculados por DILIG",
+      "updated": "2016"
     }
   }
 }
