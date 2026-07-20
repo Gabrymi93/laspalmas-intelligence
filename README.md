@@ -1,5 +1,8 @@
 # laspalmas-intelligence
 
+[![ci](https://github.com/Gabrymi93/laspalmas-intelligence/actions/workflows/ci.yml/badge.svg)](https://github.com/Gabrymi93/laspalmas-intelligence/actions/workflows/ci.yml)
+[![refresh](https://github.com/Gabrymi93/laspalmas-intelligence/actions/workflows/refresh.yml/badge.svg)](https://github.com/Gabrymi93/laspalmas-intelligence/actions/workflows/refresh.yml)
+
 Repositorio OSINT para centralizar datos HVD de **Las Palmas de Gran Canaria**.
 
 ## Fuentes
@@ -128,6 +131,16 @@ make all           # venv + refresh + queries + status
 - **Makefile** usa `$(VENV)/bin/python3` para garantizar el entorno correcto.
 - Los scripts en `ingest/` son ETL independientes (cada uno descarga una fuente).
 - Los scripts en `bin/` son utilidades transversales (runner, status, conversión).
+
+---
+
+## Aviso legal / Disclaimer
+
+- Todos los datos aquí recolectados provienen de **fuentes públicas oficiales** (ISTAC, Ayuntamiento de Las Palmas de Gran Canaria, SITCAN, Eurostat).
+- Este repositorio no modifica ni altera los datos originales; solo los transforma a formato Parquet para facilitar su análisis.
+- Los datos se proporcionan **"tal cual"** (`as is`), sin garantías de exactitud, integridad o actualidad. Verifique siempre con la fuente oficial para usos críticos.
+- Este proyecto no tiene ninguna vinculación oficial con las instituciones mencionadas.
+- El código se distribuye bajo licencia **MIT** (ver `LICENSE`).
 
 ## Pendiente
 
