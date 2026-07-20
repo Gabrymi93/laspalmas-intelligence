@@ -1,0 +1,57 @@
+name: refresh
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Refresh estable (ISTAC, SITCAN, WFS)
+        run: |
+          make population || echo "⚠️ population fallo"
+          make employment || echo "⚠️ employment fallo"
+          make renta || echo "⚠️ renta fallo"
+          make urbanismo || echo "⚠️ urbanismo fallo"
+          make geografia || echo "⚠️ geografia fallo"
+          make poblacion_secciones || echo "⚠️ poblacion_secciones fallo"
+
+      - name: Refresh volatil (GTFS, turismo)
+        run: |
+          make gtfs || echo "⚠️ gtfs fallo"
+          make tourism || echo "⚠️ tourism fallo"
+
+      - name: Validar queries
+        run: make queries
+
+      - name: Resumen
+        run: make status
+
+      - name: Commit cambios
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add -A
+          git diff --staged --quiet || git commit -m "chore: refresh $(date +%Y-%m-%d)"
+          git push
+
+      - name: Notificar fallo
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '⚠️ Refresh fallido ' + new Date().toISOString().slice(0,10),
+              body: 'Revisar: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+            })

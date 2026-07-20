@@ -1,8 +1,8 @@
-.PHONY: all refresh population employment urbanismo tourism queries status
+.PHONY: all refresh population employment urbanismo tourism gtfs queries status
 
 all: refresh queries
 
-refresh: population employment urbanismo tourism renta atestados geografia poblacion_secciones
+refresh: population employment urbanismo tourism gtfs renta atestados geografia poblacion_secciones
 
 population:
 	python3 ingest/istac_population.py
@@ -17,6 +17,9 @@ urbanismo:
 
 tourism:
 	python3 ingest/fetch_tourism.py
+
+gtfs:
+	python3 ingest/fetch_gtfs.py
 
 renta:
 	python3 ingest/istac_renta.py
