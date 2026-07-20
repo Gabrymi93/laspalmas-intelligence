@@ -1,6 +1,6 @@
 .PHONY: all refresh population employment urbanismo tourism gtfs \
         renta atestados geografia poblacion_secciones sitycleta gtfs_stops \
-        empresas \
+        empresas autonomos \
         queries status venv
 
 VENV = .venv
@@ -17,7 +17,7 @@ venv: $(VENV)
 
 # ETL targets — each downloads raw data and converts to Parquet
 refresh: population employment urbanismo tourism gtfs renta atestados \
-         geografia poblacion_secciones sitycleta gtfs_stops empresas
+         geografia poblacion_secciones sitycleta gtfs_stops empresas autonomos
 
 population: venv
 	$(PYTHON) ingest/istac_population.py
@@ -56,6 +56,9 @@ gtfs_stops: venv
 
 empresas: venv
 	$(PYTHON) ingest/istac_empresas.py
+
+autonomos: venv
+	$(PYTHON) ingest/istac_autonomos.py
 
 # Analysis
 queries: venv
