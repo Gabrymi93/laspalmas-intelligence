@@ -34,10 +34,23 @@ con = duckdb.connect()
 con.execute("INSTALL spatial; LOAD spatial;")
 
 n_ok = 0
+n_skip = 0
 for res in resources:
     rid = res["id"]
     name = res.get("name", "?")[:60]
     size = res.get("size") or 0
+
+    # Check if already downloaded
+    expected = [os.path.join(OUT, f"{rid[:8]}_{layer}.parquet") for layer in ["AMB", "CAT", "ZUSO"]]
+    existing = [p for p in expected if os.path.exists(p)]
+    if len(existing) == len(expected):
+        n_skip += 1
+        continue
+    elif existing:
+        # Partial: remove incomplete files and re-download
+        for p in existing:
+            os.remove(p)
+
     log(f"\n[{rid[:8]}] {name} ({size/1000:.0f} KB)")
 
     # Download
@@ -83,6 +96,8 @@ for res in resources:
     # Cleanup
     shutil.rmtree(extract_dir, ignore_errors=True)
     os.remove(zip_path)
+
+log(f"\nDone: {n_ok} downloaded, {n_skip} skipped (already present)")
 
 log(f"\nDone: {n_ok}/{len(resources)} resources processed")
 con.close()
