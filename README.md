@@ -1,0 +1,72 @@
+# laspalmas-intelligence
+
+Repositorio OSINT para centralizar datos HVD de **Las Palmas de Gran Canaria**.
+
+## Fuentes
+
+| Fuente | Tipo | Datasets | Acceso |
+|--------|------|----------|--------|
+| **ISTAC** (datos.canarias.es) | CKAN + REST API | ~22K datasets | CSV/TSV/JSON vía API REST |
+| **Ayuntamiento LPGC** (datosabiertos.laspalmasgc.es) | WordPress/Viavansi | ~200 datasets | DCAT RDF + CKAN DataStore API |
+| **SITCAN** (opendata.sitcan.es) | CKAN geo | 174 datasets | Descarga ZIP (SHP) |
+| **Eurostat** | SDMX | 28 datasets NUTS-3 | MCP connector |
+| **osint-canarias** (repo local) | ETL propio | Turismo elaborado | Parquet listo |
+
+## Cobertura actual
+
+| Dominio | Dataset | Registros | Período | Granularidad | Fuente |
+|---------|---------|-----------|---------|-------------|--------|
+| Población | Serie histórica | 114 | 1986-2025 | municipio | ISTAC |
+| Demografía | Indicadores | 15 | 2008-2022 | municipio | ISTAC |
+| Empleo | Paro por sexo/edad | 7.260 | 2008-03 → 2026-06 | municipio, mensual | ISTAC |
+| Empleo | Paro por sexo/ocupación | 6.105 | 2011-02 → 2026-06 | municipio, mensual | ISTAC |
+| Transporte | GTFS rutas | 47 | 2026 | línea | Ayto LPGC |
+| Transporte | GTFS viajes | 6.250 | 2026 | viaje | Ayto LPGC |
+| Transporte | GTFS horarios | 151.551 | 2026 | parada/viaje | Ayto LPGC |
+| Transporte | GTFS calendario | 9 | 2015-2025 | servicio | Ayto LPGC |
+| Turismo | Ocupación hotelera | 144 | 2009-2026 | LPGC + categoría | ISTAC |
+| Turismo | Pernoctaciones | 197 | 2010-2026 | Gran Canaria, mensual | ISTAC |
+| Turismo | Gasto turístico | 96 | 2010-2017 | Canarias, por país | ISTAC |
+| Urbanismo | PGO Plan General | 6.608 | 2012 | poligono (ZUSO) | SITCAN |
+| Urbanismo | PGO catalogación | 821 | 2012 | elemento protegido | SITCAN |
+| Urbanismo | Planes parciales | 28 planes GIS | 1994-2024 | poligono (ZUSO) | SITCAN |
+
+## Estructura
+
+```
+laspalmas-intelligence/
+├── ingest/              # scripts de descarga por fuente
+│   ├── istac_population.py
+│   ├── istac_employment.py
+│   ├── fetch_gtfs.py
+│   ├── fetch_urbanismo_sitcan.py
+│   ├── csv2parquet.py
+│   └── run_queries.py
+├── parquet/             # datos limpios en Parquet
+│   ├── poblacion/       # población + indicadores
+│   ├── empleo/          # paro registrado
+│   ├── movilidad/       # GTFS Guaguas Municipales
+│   ├── turismo/         # ocupación, pernoctaciones, gasto
+│   └── urbanismo/       # PGO + planes parciales (73 GeoParquet)
+├── sql/                 # 18 consultas DuckDB (#001-#033)
+├── meta/
+│   ├── catalog.json     # inventario completo de fuentes y datasets
+│   └── next-session.md  # plan para próxima sesión
+└── Makefile             # make refresh | queries | status
+```
+
+## Uso
+
+```bash
+make refresh   # descarga y actualiza todos los datos
+make queries   # ejecuta todas las consultas
+make status    # resumen de datasets y filas
+```
+
+## Pendiente para próxima sesión
+
+- **Población por barrio/distrito** — gap crítico: ISTAC ha solo imágenes (WMS) no datos tabulares. Alternativas: WFS Barrios (geometría) + buscar cubo ISTAC, o usar pact_t (población activa) como proxy
+- **Sensores calidad del aire** (Ayto LPGC, tiempo real 2026-07)
+- **Stops GTFS** (coordenadas de paradas — 403 bloqueado, alternativa OSM o scraping)
+- **Eurostat NUTS-3** (PIL, GVA, crimen ES704 como contexto provincial)
+- **Callejero municipal** (base geoespacial, 15 recursos)

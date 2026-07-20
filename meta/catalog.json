@@ -1,0 +1,122 @@
+{
+  "repo": "laspalmas-intelligence",
+  "municipio": "Las Palmas de Gran Canaria",
+  "codigo_ine": "35016",
+  "nuts3": "ES704",
+  "ultima_actualizacion": "2026-07-17",
+  "sources": [
+    {
+      "id": "istac",
+      "name": "Instituto Canario de Estadística",
+      "portal": "https://datos.canarias.es/catalogos/general/",
+      "api": "https://datos.canarias.es/api/estadisticas/statistical-resources/v1.0/",
+      "type": "CKAN + REST API",
+      "n_datasets": 21767,
+      "note": "Formato cubo estadístico (CSV/TSV/JSON/XML/JSONSTAT). Datos a nivel municipal."
+    },
+    {
+      "id": "comune",
+      "name": "Portal Datos Abiertos LPGC",
+      "portal": "http://datosabiertos.laspalmasgc.es/",
+      "catalog_rdf": "http://datosabiertos.laspalmasgc.es/proxyFileCKAN.php?catalog=http://datosabiertos.laspalmasgc.es/catalog.rdf",
+      "type": "Viavansi (WordPress)",
+      "n_datasets": 100,
+      "note": "Catálogo DCAT RDF. Descarga vía viewer web (sin API directa)."
+    },
+    {
+      "id": "sitcan",
+      "name": "SITCAN Open Data",
+      "portal": "https://opendata.sitcan.es/",
+      "type": "CKAN 2.10.4",
+      "n_datasets": 174,
+      "note": "Dati geo-spaziali: urbanistica, cartografia, clima."
+    },
+    {
+      "id": "eurostat",
+      "name": "Eurostat NUTS-3",
+      "portal": "https://ec.europa.eu/eurostat/",
+      "type": "SDMX",
+      "n_datasets": 28,
+      "note": "Dati provinciali ES704 (Las Palmas). Contesto comparativo."
+    }
+  ],
+  "datasets": {
+    "poblacion_padrones": {
+      "source": "istac",
+      "id": "ISTAC/C00025A_000002",
+      "title": "Población según padrones. Municipios por islas de Canarias y años",
+      "url_csv": "https://datos.canarias.es/api/estadisticas/statistical-resources/v1.0/datasets/ISTAC/C00025A_000002/1.4.csv",
+      "granularity": "municipio",
+      "years": "1986-2026",
+      "measures": ["POBLACION", "POBLACION_HOMBRES", "POBLACION_MUJERES", "POBLACION_NACIONAL", "POBLACION_EXTRANJERA", "POBLACION_VA"],
+      "updated": "2026-07-15"
+    },
+    "indicatori_demografici": {
+      "source": "istac",
+      "id": "indicadores-demograficos-para-municipios-desde-2007",
+      "title": "Indicadores demográficos para municipios de Canarias desde 2007",
+      "url_csv": "https://datos.canarias.es/catalogos/estadisticas/dataset/d2fd1aef-2228-4072-917c-f511eeeadc80/resource/343a77f8-c987-43a1-b717-47248720358b/download/2008-2022_indicadores_demograficos_municipios_pmh.csv",
+      "granularity": "municipio",
+      "years": "2008-2022",
+      "measures": ["poblacion", "poblacion_hombres", "poblacion_mujeres", "poblacion_00a14", "poblacion_15a64", "poblacion_65mas", "poblacion_extranjera", "poblacion_nacida_canarias", "poblacion_nacida_extranjero"],
+      "updated": "2023-03-16"
+    },
+    "guaguas_gtfs": {
+      "source": "comune",
+      "id": "5d9b97f9-1ffc-4910-b60e-0e03f4a0f991",
+      "title": "Guaguas Municipales. Rutas (GTFS)",
+      "granularity": "fermata/linea",
+      "updated": "2026-06-30",
+      "note": "Formato GTFS standard. Percorso via viewer web."
+    },
+    "sensori_aria": {
+      "source": "comune",
+      "id": "Sensores de calidad del aire",
+      "title": "Sensores de calidad del aire",
+      "granularity": "sensore",
+      "updated": "2026-07-17",
+      "note": "Dati in tempo reale."
+    },
+    "sitycleta": {
+      "source": "comune",
+      "id": "Sitycleta, Estaciones Moxsi",
+      "title": "Sitycleta, Estaciones Moxsi",
+      "granularity": "stazione",
+      "updated": "2026-07-12",
+      "note": "Bike sharing."
+    },
+    "callejero": {
+      "source": "comune",
+      "id": "d33b9b2a-144a-45a9-b3bb-652d384e2a7a",
+      "title": "Callejero Municipal de Las Palmas de Gran Canaria",
+      "granularity": "via/numero",
+      "updated": "2026-06-29",
+      "note": "15 risorse. Base geospaziale."
+    },
+    "turismo_microdati": {
+      "source": "istac",
+      "id": "Encuesta sobre el Gasto Turístico",
+      "title": "Microdatos Encuesta Gasto Turístico en Canarias",
+      "granularity": "isola?",
+      "years": "2010-2025",
+      "updated": "2026-06-10",
+      "note": "Serie trimestrale. 40+ dataset sul portale CKAN."
+    },
+    "occupazione": {
+      "source": "istac",
+      "title": "Población activa/parada/ocupada registrada. Municipios. 2024",
+      "granularity": "municipio",
+      "years": "2024",
+      "updated": "2026-06-10",
+      "note": "Dati 2024 aggiornati. Formato mappe + cubi."
+    },
+    "urbanistica_piani": {
+      "source": "sitcan",
+      "id": "planeamiento-urbanistico-de-las-palmas-de-gran-canaria",
+      "title": "Planeamiento urbanístico de Las Palmas de Gran Canaria",
+      "granularity": "particella",
+      "resources": 127,
+      "note": "PGO, PEPRI, piani parziali, sentenze. ZIP con SHP."
+    }
+  }
+}
