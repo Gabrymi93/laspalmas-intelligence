@@ -35,6 +35,9 @@ Repositorio OSINT para centralizar datos HVD de **Las Palmas de Gran Canaria**.
 | Urbanismo | PGO Plan General | 6.608 | 2012 | poligono (ZUSO) | SITCAN |
 | Urbanismo | PGO catalogación | 821 | 2012 | elemento protegido | SITCAN |
 | Urbanismo | Planes parciales | 28 planes GIS | 1994-2024 | poligono (ZUSO) | SITCAN |
+| Geografía | Distritos (geometría + datos) | 5 | 2022 | distrito | WFS ISTAC |
+| Geografía | Barrios (geometría + datos) | 121 | 2024 | barrio | WFS ISTAC |
+| Geografía | Secciones censales (geometría) | 275 | 2022 | sección | WFS ISTAC |
 
 ## Estructura
 
@@ -50,9 +53,11 @@ laspalmas-intelligence/
 ├── parquet/             # datos limpios en Parquet
 │   ├── poblacion/       # población + indicadores
 │   ├── empleo/          # paro registrado
-│   ├── movilidad/       # GTFS Guaguas Municipales
+│   ├── economia/        # renta bruta por municipio y sección
+│   ├── movilidad/       # GTFS + atestados policía
 │   ├── turismo/         # ocupación, pernoctaciones, gasto
-│   └── urbanismo/       # PGO + planes parciales (73 GeoParquet)
+│   ├── urbanismo/       # PGO + planes parciales (73 GeoParquet)
+│   └── geografia/       # distritos, barrios, secciones (GeoParquet + dims)
 ├── sql/                 # 18 consultas DuckDB (#001-#033)
 ├── meta/
 │   ├── catalog.json     # inventario completo de fuentes y datasets
@@ -70,7 +75,7 @@ make status    # resumen de datasets y filas
 
 ## Pendiente para próxima sesión
 
-- **Población por barrio/distrito** — gap crítico: ISTAC ha solo imágenes (WMS) no datos tabulares. Alternativas: WFS Barrios (geometría) + buscar cubo ISTAC, o usar pact_t (población activa) como proxy
+- **Población por barrio/distrito** — ora abbiamo pact_t (población activa) da WFS come proxy. Manca población total por barrio.
 - **Sensores calidad del aire** (Ayto LPGC, tiempo real 2026-07)
 - **Stops GTFS** (coordenadas de paradas — 403 bloqueado, alternativa OSM o scraping)
 - **Eurostat NUTS-3** (PIL, GVA, crimen ES704 como contexto provincial)
@@ -78,3 +83,4 @@ make status    # resumen de datasets y filas
 - **Sitycleta/Moxsi** (bike sharing stations, ya catalogado)
 - **Centros educativos** (ISTAC, geolocalizados)
 - **Analítica urbana** (conteo personas mercados, live)
+- **Cross-queries**: renta × secciones × barrios × PGO (spatial join verde por barrio)

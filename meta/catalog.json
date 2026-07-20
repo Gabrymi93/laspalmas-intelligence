@@ -138,6 +138,35 @@
       "note": "281 secciones en LPGC, 5 distritos. Mismas medidas que municipio",
       "updated": "2026-07-15"
     },
+    "geografia_distritos": {
+      "source": "istac",
+      "id": "WFS epareg:Distritos-2022",
+      "title": "Indicadores laborales por distritos de Canarias",
+      "granularity": "distrito",
+      "years": "2022",
+      "measures": ["pact_t", "pocu_t", "ppar_t", "tpar_t", "psal_t"],
+      "note": "5 distritos LPGC. Geometría + indicadores laborales",
+      "updated": "2026"
+    },
+    "geografia_barrios": {
+      "source": "istac",
+      "id": "WFS epareg:Barrios-2024",
+      "title": "Indicadores laborales por barrios de Canarias",
+      "granularity": "barrio",
+      "years": "2024",
+      "measures": ["pact_t", "pocu_t", "ppar_t", "tpar_t"],
+      "note": "121 barrios LPGC. Geometría + indicadores laborales",
+      "updated": "2026"
+    },
+    "geografia_secciones": {
+      "source": "istac",
+      "id": "WFS epareg:Secciones-2022",
+      "title": "Secciones censales de Canarias",
+      "granularity": "seccion censal",
+      "years": "2022",
+      "note": "275 secciones LPGC. Geometría, vinculable con renta via geocode",
+      "updated": "2026"
+    },
     "atestados_accidentes": {
       "source": "comune",
       "id": "atestados-policia-local",
