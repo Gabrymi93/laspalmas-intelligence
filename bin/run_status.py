@@ -28,6 +28,7 @@ datasets = [
     ("geografia_distritos", "parquet/geografia/distritos_lpgc.parquet"),
     ("geografia_hierarchy", "parquet/geografia/dim_hierarchy.parquet"),
     ("urbanismo_ZUSO", "parquet/urbanismo/32ffdaab_ZUSO.parquet"),
+    ("empresas_lpgc", "parquet/economia/empresas_lpgc.parquet"),
 ]
 
 print("=== datasets ===")
