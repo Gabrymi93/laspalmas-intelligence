@@ -1,46 +1,61 @@
-.PHONY: all refresh population employment urbanismo tourism gtfs queries status
+.PHONY: all refresh population employment urbanismo tourism gtfs \
+        renta atestados geografia poblacion_secciones sitycleta gtfs_stops \
+        queries status venv
 
-all: refresh queries
+VENV = .venv
+PYTHON = $(VENV)/bin/python3
 
-refresh: population employment urbanismo tourism gtfs renta atestados geografia poblacion_secciones
+all: venv refresh queries status
 
-population:
-	python3 ingest/istac_population.py
-	python3 ingest/csv2parquet.py
+$(VENV):
+	python3 -m venv $(VENV)
+	$(PYTHON) -m pip install --upgrade pip -q
+	$(PYTHON) -m pip install -r requirements.txt -q
 
-employment:
-	python3 ingest/istac_employment.py
-	python3 ingest/csv2parquet.py
+venv: $(VENV)
 
-urbanismo:
-	python3 ingest/fetch_urbanismo_sitcan.py
+# ETL targets — each downloads raw data and converts to Parquet
+refresh: population employment urbanismo tourism gtfs renta atestados \
+         geografia poblacion_secciones sitycleta gtfs_stops
 
-tourism:
-	python3 ingest/fetch_tourism.py
+population: venv
+	$(PYTHON) ingest/istac_population.py
+	$(PYTHON) bin/csv2parquet.py
 
-gtfs:
-	python3 ingest/fetch_gtfs.py
+employment: venv
+	$(PYTHON) ingest/istac_employment.py
+	$(PYTHON) bin/csv2parquet.py
 
-renta:
-	python3 ingest/istac_renta.py
+urbanismo: venv
+	$(PYTHON) ingest/fetch_urbanismo_sitcan.py
 
-atestados:
-	python3 ingest/fetch_atestados.py
+tourism: venv
+	$(PYTHON) ingest/fetch_tourism.py
 
-geografia:
-	python3 ingest/fetch_geografia_wfs.py
+gtfs: venv
+	$(PYTHON) ingest/fetch_gtfs.py
 
-poblacion_secciones:
-	python3 ingest/fetch_poblacion_secciones.py
+renta: venv
+	$(PYTHON) ingest/istac_renta.py
 
-sitycleta:
-	python3 ingest/fetch_sitycleta.py
+atestados: venv
+	$(PYTHON) ingest/fetch_atestados.py
 
-gtfs_stops:
-	python3 ingest/fetch_gtfs_stops.py
+geografia: venv
+	$(PYTHON) ingest/fetch_geografia_wfs.py
 
-queries:
-	python3 ingest/run_queries.py
+poblacion_secciones: venv
+	$(PYTHON) ingest/fetch_poblacion_secciones.py
 
-status:
-	python3 ingest/run_status.py
+sitycleta: venv
+	$(PYTHON) ingest/fetch_sitycleta.py
+
+gtfs_stops: venv
+	$(PYTHON) ingest/fetch_gtfs_stops.py
+
+# Analysis
+queries: venv
+	$(PYTHON) bin/run_queries.py
+
+status: venv
+	$(PYTHON) bin/run_status.py

@@ -21,6 +21,13 @@ datasets = [
     ("atestados_vehiculos", "parquet/movilidad/atestados_veh.parquet"),
     ("renta_municipio", "parquet/economia/renta_municipio_lpgc.parquet"),
     ("renta_secciones", "parquet/economia/renta_secciones_lpgc.parquet"),
+    ("turismo_occupazione", "parquet/turismo/occupazione_hotel_lpgc.parquet"),
+    ("turismo_pernottamenti", "parquet/turismo/pernottamenti_gran_canaria.parquet"),
+    ("turismo_spesa", "parquet/turismo/spesa_turistica_paesi.parquet"),
+    ("geografia_barrios", "parquet/geografia/barrios_lpgc.parquet"),
+    ("geografia_distritos", "parquet/geografia/distritos_lpgc.parquet"),
+    ("geografia_hierarchy", "parquet/geografia/dim_hierarchy.parquet"),
+    ("urbanismo_ZUSO", "parquet/urbanismo/32ffdaab_ZUSO.parquet"),
 ]
 
 print("=== datasets ===")

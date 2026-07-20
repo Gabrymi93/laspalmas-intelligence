@@ -5,8 +5,18 @@
   "nuts3": "ES704",
   "ultima_actualizacion": "2026-07-20",
   "total_datasets": 24,
-  "total_queries": 25,
+  "total_queries": 35,
   "total_ingest_scripts": 12,
+  "query_coverage": {
+    "poblacion": "001-004",
+    "empleo": "005-008, 013, 024-025",
+    "movilidad": "009-012, 016-018",
+    "turismo": "020-023",
+    "urbanismo": "030-033, 037-038",
+    "economia": "015, 034, 039",
+    "geografia": "014, 035-036",
+    "seguridad": "040"
+  },
   "sources": [
     {
       "id": "istac",

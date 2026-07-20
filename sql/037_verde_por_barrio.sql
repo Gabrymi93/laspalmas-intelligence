@@ -1,10 +1,10 @@
 -- Spazi verdi per barrio: intersezione spaziale PGO ZUSO (Espacios Libres) con Barrios
 WITH verde AS (
     SELECT b.label as barrio,
-           sum(ST_Area(ST_Intersection(ST_Transform(b.geometry, 'EPSG:32628'), z.geom))) as verde_m2
+           sum(ST_Area(ST_Intersection(ST_Transform(ST_FlipCoordinates(b.geometry), 'EPSG:4326', 'EPSG:32628'), z.geom))) as verde_m2
     FROM read_parquet('parquet/geografia/barrios_lpgc.parquet') b
     JOIN read_parquet('parquet/urbanismo/32ffdaab_ZUSO.parquet') z
-      ON ST_Intersects(ST_Transform(b.geometry, 'EPSG:32628'), z.geom)
+      ON ST_Intersects(ST_Transform(ST_FlipCoordinates(b.geometry), 'EPSG:4326', 'EPSG:32628'), z.geom)
     WHERE z.TXTPLAN LIKE '%Libres%'
     GROUP BY b.label
 ),
