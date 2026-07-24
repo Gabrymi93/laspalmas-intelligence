@@ -7,9 +7,10 @@
   "total_datasets": 26,
   "total_queries": 41,
   "total_ingest_scripts": 14,
-  "catalogos_locales": {
-    "laspalmasgc": "meta/catalogos/laspalmasgc_catalogo.parquet (100 datasets, DCAT RDF)",
-    "istac": "meta/catalogos/istac_catalogo.parquet (2000 datasets, CKAN API)"
+  "catalogos_api": {
+    "laspalmasgc": "http://apidatosabiertos.laspalmasgc.es/api/3/action (CKAN DataStore)",
+    "istac": "https://datos.canarias.es/catalogos/estadisticas/api/3/action (CKAN)",
+    "sitcan": "https://opendata.sitcan.es/api/3/action (CKAN geo)"
   },
   "query_coverage": {
     "poblacion": "001-004",
