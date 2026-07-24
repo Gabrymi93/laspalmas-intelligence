@@ -4,9 +4,13 @@
   "codigo_ine": "35016",
   "nuts3": "ES704",
   "ultima_actualizacion": "2026-07-20",
-  "total_datasets": 24,
-  "total_queries": 35,
-  "total_ingest_scripts": 12,
+  "total_datasets": 26,
+  "total_queries": 41,
+  "total_ingest_scripts": 14,
+  "catalogos_locales": {
+    "laspalmasgc": "meta/catalogos/laspalmasgc_catalogo.parquet (100 datasets, DCAT RDF)",
+    "istac": "meta/catalogos/istac_catalogo.parquet (2000 datasets, CKAN API)"
+  },
   "query_coverage": {
     "poblacion": "001-004",
     "empleo": "005-008, 013, 024-025",
