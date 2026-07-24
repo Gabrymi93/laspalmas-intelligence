@@ -44,7 +44,7 @@ Repositorio OSINT para centralizar datos HVD de **Las Palmas de Gran Canaria**.
 | Geografía | Barrios (geometría + indicadores) | 121 | 2024 | barrio | WFS ISTAC |
 | Geografía | Secciones censales (geometría) | 275 | 2022 | sección | WFS ISTAC |
 
-## Queries (35)
+## Queries (41)
 
 | # | Query | Dominio |
 |---|-------|---------|
@@ -65,13 +65,18 @@ Repositorio OSINT para centralizar datos HVD de **Las Palmas de Gran Canaria**.
 | 015 | **Renta, verde y mercado laboral por distrito** | Economía |
 | 016 | **Accidentes por tipo de colisión y evolución** | Movilidad |
 | 017 | **Complementariedad guaguas × Sitycleta** | Movilidad |
-| 018 | **Correlación accidentes ↔ desempleo (2008-2013)** | Movilidad |
+| 018 | **Comparación temporal accidentes ↔ desempleo** | Movilidad |
+| 019 | **Evolución tejido empresarial por tamaño** | Economía |
 | 020 | Ocupación hotelera LPGC por categoría | Turismo |
 | 021 | Pernoctaciones mensuales Gran Canaria | Turismo |
 | 022 | Gasto turístico por país de origen | Turismo |
 | 023 | **Estacionalidad turística (perfil mensual)** | Turismo |
 | 024 | **Perfil del desempleo por grupo de edad** | Empleo |
 | 025 | **Brecha de género en el desempleo** | Empleo |
+| 026 | **Micro-empresas ↔ desempleo** | Economía |
+| 027 | **Evolución autónomos LPGC (2010-2026)** | Economía |
+| 028 | **Demanda potencial coworking** | Economía |
+| 029 | **Distribución sectorial autónomos** | Economía |
 | 030 | Zonificación del PGO | Urbanismo |
 | 031 | Catálogo de protección | Urbanismo |
 | 032 | Resumen de planeamiento | Urbanismo |
@@ -83,6 +88,7 @@ Repositorio OSINT para centralizar datos HVD de **Las Palmas de Gran Canaria**.
 | 038 | Espacios verdes por distrito | Urbanismo |
 | 039 | Paro vs renta por distrito | Economía |
 | 040 | Evolución de la severidad de accidentes | Movilidad |
+| 041 | **Resumen del callejero municipal** | Geografía |
 
 **Negrita** = queries añadidas en la sesión de julio 2026.
 
@@ -101,6 +107,7 @@ laspalmas-intelligence/
 │   ├── urbanismo/      # PGO + planes parciales (GeoParquet)
 │   └── geografia/      # distritos, barrios, secciones (GeoParquet + dimensión)
 ├── sql/                # 35 consultas DuckDB (#001-#040)
+├── bin/                # utilidades (runner queries, status, validación, csv2parquet)
 ├── meta/
 │   ├── catalog.json    # inventario completo de fuentes y datasets
 │   └── next-session.md # plan para próxima sesión
@@ -108,7 +115,7 @@ laspalmas-intelligence/
 ├── .venv/              # entorno virtual Python
 ├── requirements.txt    # dependencias
 ├── requirements.lock   # versiones precisas
-└── Makefile            # make refresh | queries | status
+└── Makefile            # make refresh | queries | status | validate
 ```
 
 ## Uso
@@ -116,9 +123,10 @@ laspalmas-intelligence/
 ```bash
 make venv          # crear entorno virtual e instalar dependencias
 make refresh       # descargar y actualizar todos los datos
-make queries       # ejecutar todas las consultas (35)
+make validate      # validar integridad de datasets (rows, año, columnas)
+make queries       # ejecutar todas las consultas (41)
 make status        # resumen de datasets y filas
-make all           # venv + refresh + queries + status
+make all           # venv + refresh + validate + queries + status
 ```
 
 ## Notas técnicas
@@ -144,11 +152,9 @@ make all           # venv + refresh + queries + status
 
 ## Pendiente
 
-- **Sensores calidad del aire** (Ayto LPGC, live 2026-07, 3 recursos)
-- **Callejero municipal** (base geoespacial, 15 recursos)
 - **Centros educativos** (ISTAC, geolocalizados)
 - **Analítica urbana** (conteo personas mercados, live)
 - **Eurostat NUTS-3** (PIL, GVA, crimen ES704 como contexto provincial)
-- **GTFS stops OSM** (script `fetch_gtfs_stops.py` listo, ejecutar si Overpass disponible)
+- **Sensores calidad del aire** (Ayto LPGC, live 2026-07, 3 recursos)
 - **Sitycleta Moxsi actual** (GeoJSON 2026 no descargable, solo 2018 disponible)
 - **Atestados 2017+** — no publicados por el Ayuntamiento

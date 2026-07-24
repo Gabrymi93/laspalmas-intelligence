@@ -21,21 +21,19 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Refresh estable (ISTAC, SITCAN, WFS)
-        run: |
-          make population || echo "⚠️ population fallo"
-          make employment || echo "⚠️ employment fallo"
-          make renta || echo "⚠️ renta fallo"
-          make urbanismo || echo "⚠️ urbanismo fallo"
-          make geografia || echo "⚠️ geografia fallo"
-          make poblacion_secciones || echo "⚠️ poblacion_secciones fallo"
+        run: make population employment renta urbanismo geografia poblacion_secciones
 
-      - name: Refresh volatil (GTFS, turismo)
-        run: |
-          make gtfs || echo "⚠️ gtfs fallo"
-          make tourism || echo "⚠️ tourism fallo"
+      - name: Refresh económico (empresas, autónomos)
+        run: make empresas autonomos
 
-      - name: Validar queries
-        run: make queries
+      - name: Refresh movilidad
+        run: make atestados gtfs sitycleta gtfs_stops
+
+      - name: Refresh turismo
+        run: make tourism
+
+      - name: Validar datasets
+        run: make validate
 
       - name: Resumen
         run: make status

@@ -1,6 +1,6 @@
--- Correlación entre incidentes viales y desempleo en LPGC (2008-2013)
--- Mientras los accidentes bajan, el paro sube: ¿menos movilidad durante la crisis?
--- ¿Los accidentes son menos pero más graves?
+-- Comparación temporal: accidentes de tráfico vs desempleo en LPGC (2008-2013)
+-- Muestra las dos series lado a lado. No es un análisis de correlación:
+-- solo 6 observaciones, posibles confundentes (crisis económica, movilidad, etc.)
 -- Fuente: Atestados Policía Local + ISTAC Paro Registrado
 
 WITH incidentes AS (
@@ -28,9 +28,7 @@ SELECT i.year,
        i.media_heridos,
        i.total_heridos,
        p.paro_medio_anual,
-       -- Ratio paro por accidente (indica cuánto paro "acompaña" a cada accidente)
        round(p.paro_medio_anual * 1.0 / i.total_accidentes, 1) AS paro_por_accidente,
-       -- Variación interanual
        round((i.total_accidentes - lag(i.total_accidentes) OVER (ORDER BY i.year)) * 100.0 / 
              NULLIF(lag(i.total_accidentes) OVER (ORDER BY i.year), 0), 1) AS var_accidentes_pct,
        round((p.paro_medio_anual - lag(p.paro_medio_anual) OVER (ORDER BY p.anno)) * 100.0 / 

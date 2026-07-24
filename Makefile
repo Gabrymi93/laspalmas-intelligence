@@ -1,12 +1,12 @@
 .PHONY: all refresh population employment urbanismo tourism gtfs \
         renta atestados geografia poblacion_secciones sitycleta gtfs_stops \
         empresas autonomos callejero \
-        queries status venv
+        queries status validate venv
 
 VENV = .venv
 PYTHON = $(VENV)/bin/python3
 
-all: venv refresh queries status
+all: venv refresh validate queries status
 
 $(VENV):
 	python3 -m venv $(VENV)
@@ -66,6 +66,9 @@ callejero: venv
 # Analysis
 queries: venv
 	$(PYTHON) bin/run_queries.py
+
+validate: venv
+	$(PYTHON) bin/validate.py
 
 status: venv
 	$(PYTHON) bin/run_status.py

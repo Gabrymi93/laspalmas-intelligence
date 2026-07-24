@@ -75,7 +75,7 @@ print(f"\n  -> Saved: {out_path} ({len(lpgc)} rows)")
 
 # Preview latest data
 print("\n  --- Ultimos datos (2026) ---")
-last = lpgc[lpgc.year == lpgc.year.max() & lpgc.periodo_code.str.contains("M")]
+last = lpgc[(lpgc.year == lpgc.year.max()) & lpgc.periodo_code.str.contains("M")]
 for estrato in ["_T", "1T9", "10T49", "50T249", "GE250"]:
     row = last[last.estrato_code == estrato].head(1)
     if len(row) > 0:

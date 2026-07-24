@@ -95,14 +95,6 @@
       "updated": "2026-07-17",
       "note": "Dati in tempo reale."
     },
-    "sitycleta": {
-      "source": "comune",
-      "id": "Sitycleta, Estaciones Moxsi",
-      "title": "Sitycleta, Estaciones Moxsi",
-      "granularity": "stazione",
-      "updated": "2026-07-12",
-      "note": "Bike sharing."
-    },
     "callejero": {
       "source": "comune",
       "id": "d33b9b2a-144a-45a9-b3bb-652d384e2a7a",
