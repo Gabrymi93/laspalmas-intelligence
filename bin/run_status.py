@@ -30,6 +30,7 @@ datasets = [
     ("urbanismo_ZUSO", "parquet/urbanismo/32ffdaab_ZUSO.parquet"),
     ("empresas_lpgc", "parquet/economia/empresas_lpgc.parquet"),
     ("autonomos_lpgc", "parquet/economia/autonomos_lpgc.parquet"),
+    ("callejero_lpgc", "parquet/geografia/callejero_lpgc.parquet"),
 ]
 
 print("=== datasets ===")
