@@ -3,10 +3,10 @@
   "municipio": "Las Palmas de Gran Canaria",
   "codigo_ine": "35016",
   "nuts3": "ES704",
-  "ultima_actualizacion": "2026-07-20",
-  "total_datasets": 26,
-  "total_queries": 41,
-  "total_ingest_scripts": 14,
+  "ultima_actualizacion": "2026-08-13",
+  "total_datasets": 29,
+  "total_queries": 44,
+  "total_ingest_scripts": 15,
   "catalogos_api": {
     "laspalmasgc": "http://apidatosabiertos.laspalmasgc.es/api/3/action (CKAN DataStore)",
     "istac": "https://datos.canarias.es/catalogos/estadisticas/api/3/action (CKAN)",
@@ -20,7 +20,8 @@
     "urbanismo": "030-033, 037-038",
     "economia": "015, 034, 039",
     "geografia": "014, 035-036",
-    "seguridad": "040"
+    "seguridad": "040",
+    "ambiente": "042-044"
   },
   "sources": [
     {
@@ -89,11 +90,17 @@
     },
     "sensori_aria": {
       "source": "comune",
-      "id": "Sensores de calidad del aire",
-      "title": "Sensores de calidad del aire",
-      "granularity": "sensore",
-      "updated": "2026-07-17",
-      "note": "Dati in tempo reale."
+      "id": "940cc41a-4e25-4c3d-8d96-ad1047420919",
+      "title": "Sensores de calidad del aire (Gemelo Digital)",
+      "granularity": "sensore/estacion",
+      "updated": "2026-08-13",
+      "note": "3 recursos: sensores propios (R1 4f653821...), estaciones Gob. de Canarias (R2 1ce26979...), ubicaciones GeoJSON. Valores crudos sin correccion.",
+      "ingested": true,
+      "parquet": [
+        "parquet/ambiente/calidad_aire_gemelo.parquet",
+        "parquet/ambiente/calidad_aire_estaciones.parquet",
+        "parquet/ambiente/calidad_aire_estaciones_geo.parquet"
+      ]
     },
     "callejero": {
       "source": "comune",
@@ -206,6 +213,35 @@
       "measures": ["DILIG", "LUGAR", "FECHA", "HORA", "VEHICULOS", "HERIDOS", "DESTINO", "COLISION"],
       "note": "76.178 accidentes, 45.488 heridos, 148.650 vehículos. Vinculados por DILIG",
       "updated": "2016"
+    },
+    "calidad_aire_gemelo": {
+      "source": "comune",
+      "id": "4f653821-b6c8-483a-b9a4-b919ac41f4ac",
+      "title": "Sensores propios de calidad del aire (Gemelo Digital)",
+      "granularity": "sensor",
+      "years": "2026-05 → 2026-07",
+      "measures": ["PM2_5", "PM_10", "co2", "temperatura", "humedad", "presion", "iaq_index", "tvoc"],
+      "note": "4 sensores (IOT-005-001..004) en Mercado Central y Mercado Puerto. ~7.700 lecturas. Valores crudos sin factor de escala",
+      "updated": "2026-07-21"
+    },
+    "calidad_aire_estaciones": {
+      "source": "comune",
+      "id": "1ce26979-183e-4dc3-98e7-739628e8c554",
+      "title": "Sensores del Gobierno de Canarias (calidad del aire)",
+      "granularity": "estacion x parametro",
+      "years": "2025-07 → 2026-05",
+      "measures": ["nombreEstacion", "nombreParametro", "valorTexto", "valorNumerico", "Fecha"],
+      "note": "4 estaciones, 7 parámetros (NO2, O3, SO2, PM10, PM2,5), formato largo. ~118.840 lecturas. Incluye clasificacion valor_texto",
+      "updated": "2026-07-03"
+    },
+    "calidad_aire_estaciones_geo": {
+      "source": "comune",
+      "id": "2e0a921f-aed9-4357-a4af-4dd6728b26c1",
+      "title": "Ubicación de las estaciones de calidad del aire",
+      "granularity": "estacion",
+      "measures": ["OBJECTID", "Nombre", "lat", "lon"],
+      "note": "4 estaciones geolocalizadas. Fuente ArcGIS FeatureServer EstacionesCalidadAire",
+      "updated": "2026-08-13"
     }
   }
 }

@@ -42,3 +42,4 @@ Cada script en `ingest/` descarga de una fuente y produce archivos Parquet en `p
 | `fetch_sitycleta.py` | Ayto LPGC | Estaciones Sitycleta |
 | `fetch_callejero.py` | Ayto LPGC | Callejero municipal |
 | `fetch_gtfs_stops.py` | OSM / Overpass | Coordenadas de paradas GTFS |
+| `fetch_calidad_aire.py` | Ayto LPGC | Calidad del aire (Gemelo Digital: sensores propios + estaciones Gob. de Canarias) |

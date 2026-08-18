@@ -9,3 +9,6 @@ __pycache__/
 parquet/**/*.csv
 tmp/
 /tmp/
+
+# Note interne
+_local/

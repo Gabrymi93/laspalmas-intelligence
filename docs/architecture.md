@@ -13,8 +13,9 @@ laspalmas-intelligence/
 │   ├── movilidad/      # GTFS + atestados policía + sitycleta
 │   ├── turismo/        # ocupación, pernoctaciones, gasto
 │   ├── urbanismo/      # PGO + planes parciales (GeoParquet)
+│   ├── ambiente/       # calidad del aire (Gemelo Digital)
 │   └── geografia/      # distritos, barrios, secciones, callejero
-├── sql/                # 41 consultas DuckDB (#001-#041)
+├── sql/                # 44 consultas DuckDB (#001-#044)
 ├── meta/
 │   ├── catalog.json    # inventario completo de fuentes y datasets
 │   └── next-session.md # plan para próxima sesión

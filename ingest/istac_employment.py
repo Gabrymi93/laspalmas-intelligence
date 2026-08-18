@@ -5,9 +5,11 @@ Sources:
   - E59021A_000011: Paro registrado por sexo y ocupacion (2011-02 → presente, mensual)
 Output: parquet/empleo/
 """
-import urllib.request
 import csv
 import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from http_utils import fetch_text
 
 LPGC = "35016"
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,8 +31,7 @@ datasets = [
 
 for ds in datasets:
     print(f"[{ds['name']}] Downloading {ds['desc']}...")
-    response = urllib.request.urlopen(ds["url"])
-    content = response.read().decode("utf-8")
+    content = fetch_text(ds["url"])
 
     rows = []
     reader = csv.DictReader(content.splitlines())

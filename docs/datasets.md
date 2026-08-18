@@ -29,5 +29,10 @@
 | Geografía | Barrios (geometría + indicadores) | 121 | 2024 | barrio | WFS ISTAC |
 | Geografía | Secciones censales (geometría) | 275 | 2022 | sección | WFS ISTAC |
 | Geografía | Callejero municipal | 5.305 | 2026 | segmento vial | Ayto LPGC |
+| Ambiente | Calidad aire: sensores propios (mercados) | 7.725 | 2026-05 → 2026-07 | sensor, ~horario | Ayto LPGC |
+| Ambiente | Calidad aire: estaciones Gob. de Canarias | 118.840 | 2025-07 → 2026-05 | estación × parámetro | Ayto LPGC |
+| Ambiente | Ubicación estaciones calidad del aire | 4 | 2026 | estación (lat/lon) | Ayto LPGC |
 
-**Total**: 26 datasets, ~450K registros.
+**Total**: 29 datasets, ~570K registros.
+
+> Nota: los valores numéricos son lecturas crudas del sensor (sin factor de escala, pueden incluir negativos).

@@ -1,4 +1,4 @@
-# Consultas SQL (41)
+# Consultas SQL (44)
 
 Todas las consultas están en `sql/` y se ejecutan con `make queries`.
 
@@ -73,3 +73,10 @@ Todas las consultas están en `sql/` y se ejecutan con `make queries`.
 | # | Archivo | Descripción |
 |---|---------|-------------|
 | 040 | `040_atestados_severidad.sql` | Evolución de la severidad de accidentes |
+
+## Ambiente (042-044)
+| # | Archivo | Descripción |
+|---|---------|-------------|
+| 042 | `042_calidad_aire_resumen.sql` | Resumen de sensores de calidad del aire (Gemelo Digital) |
+| 043 | `043_calidad_aire_estaciones.sql` | Media y última lectura por estación y parámetro (Gob. de Canarias) |
+| 044 | `044_calidad_aire_gemelo_mercados.sql` | Medias por mercado y sensor (sensores propios) |
