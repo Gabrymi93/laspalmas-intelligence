@@ -9,9 +9,11 @@ Output:
 """
 import os
 import json
-import urllib.request
 import urllib.parse
 import pandas as pd
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from http_utils import fetch_json
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(BASE, "parquet", "ambiente")
@@ -31,8 +33,7 @@ def fetch_datastore(resource_id):
     while True:
         q = f'SELECT * FROM "{resource_id}" ORDER BY "_id" LIMIT {PAGE} OFFSET {offset}'
         url = f"{SQL}?{urllib.parse.urlencode({'sql': q})}"
-        with urllib.request.urlopen(url, timeout=120) as r:
-            data = json.loads(r.read())
+        data = fetch_json(url)
         if not data.get("success"):
             raise RuntimeError(f"datastore_search_sql error: {data.get('error')}")
         page = data["result"].get("records", [])
@@ -97,8 +98,7 @@ FS_QUERY = ("https://services-eu1.arcgis.com/eV9RayDSwR2BokOl/ArcGIS/rest/servic
             "EstacionesCalidadAire/FeatureServer/0/query")
 params = urllib.parse.urlencode({"where": "1=1", "outFields": "*",
                                  "returnGeometry": "true", "f": "geojson"})
-with urllib.request.urlopen(f"{FS_QUERY}?{params}", timeout=60) as r:
-    geojson = json.loads(r.read())
+geojson = fetch_json(f"{FS_QUERY}?{params}", timeout=60)
 
 rows = []
 for f in geojson.get("features", []):

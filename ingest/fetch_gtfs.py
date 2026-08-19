@@ -6,7 +6,9 @@ Output: parquet/movilidad/gtfs_*.parquet
 import time
 import os
 import pandas as pd
-import requests
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from http_utils import fetch_json
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(BASE, "parquet", "movilidad")
@@ -27,10 +29,9 @@ def fetch_all(rid, name):
     offset = 0
     limit = 32000
     while True:
-        r = requests.get(f"{CKAN}/datastore_search", params={
+        data = fetch_json(f"{CKAN}/datastore_search", params={
             "resource_id": rid, "limit": limit, "offset": offset
-        }, timeout=30)
-        data = r.json()["result"]
+        }, timeout=30)["result"]
         records = data.get("records", [])
         if not records:
             break

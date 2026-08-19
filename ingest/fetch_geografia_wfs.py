@@ -5,8 +5,11 @@ Output: parquet/geografia/ (GeoParquet + dimension table)
 """
 import json
 import os
-import urllib.request
+import urllib.parse
 import duckdb
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from http_utils import fetch_json
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(BASE, "parquet", "geografia")
@@ -24,13 +27,11 @@ def wfs_request(type_name, cql_filter=None, max_features=2000):
         "outputFormat=application/json",
     ]
     if cql_filter:
-        params.append(f"cql_filter={urllib.request.quote(cql_filter)}")
+        params.append(f"cql_filter={urllib.parse.quote(cql_filter)}")
     params.append(f"maxFeatures={max_features}")
     url = f"{WFS}?{'&'.join(params)}"
     print(f"  {url[:120]}...", flush=True)
-    req = urllib.request.Request(url)
-    with urllib.request.urlopen(req, timeout=60) as r:
-        return json.loads(r.read())
+    return fetch_json(url, timeout=60)
 
 def save_geoparquet(features, out_path, layer_name):
     if not features:

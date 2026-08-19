@@ -6,10 +6,11 @@ Output: parquet/urbanismo/ (GeoParquet)
 import json
 import os
 import sys
-import urllib.request
 import zipfile
 import shutil
 import duckdb
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from http_utils import fetch_json, fetch_bytes
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(BASE, "parquet", "urbanismo")
@@ -22,9 +23,7 @@ def log(msg):
 
 log("[fetch] Getting SIPU resources from CKAN...")
 url = "https://opendata.sitcan.es/api/3/action/package_show?id=6c933d1e-843d-417a-93ab-aafa95fefdd4"
-req = urllib.request.Request(url)
-with urllib.request.urlopen(req, timeout=30) as r:
-    data = json.loads(r.read())
+data = fetch_json(url, timeout=30)
 
 resources = [res for res in data["result"]["resources"] if res.get("format") == "SIPU"]
 resources.sort(key=lambda x: x.get("size") or 0)
@@ -56,7 +55,8 @@ for res in resources:
     # Download
     zip_path = os.path.join(TMP, f"{rid}.zip")
     try:
-        urllib.request.urlretrieve(res["url"], zip_path)
+        with open(zip_path, "wb") as f:
+            f.write(fetch_bytes(res["url"], timeout=120))
     except Exception as e:
         log(f"  ✗ download: {e}")
         continue

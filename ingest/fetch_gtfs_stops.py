@@ -3,7 +3,10 @@ Ingest: GTFS stop coordinates via OSM Overpass API.
 Matches our 844 stop_ids from stop_times with OSM bus_stop ref tags.
 Output: parquet/movilidad/gtfs_stops.parquet
 """
-import json, os, time, urllib.request, urllib.parse, pandas as pd, duckdb
+import json, os, urllib.parse, pandas as pd, duckdb
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from http_utils import fetch_bytes_post
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(BASE, "parquet", "movilidad")
@@ -21,22 +24,11 @@ node["highway"="bus_stop"](area);
 out body 1000;
 '''
 data = urllib.parse.urlencode({"data": query}).encode()
-for attempt in range(3):
-    try:
-        req = urllib.request.Request(
-            "https://overpass-api.de/api/interpreter", data=data,
-            headers={"User-Agent": "laspalmas-intelligence/1.0", "Content-Type": "application/x-www-form-urlencoded"}
-        )
-        resp = urllib.request.urlopen(req, timeout=120)
-        result = json.loads(resp.read())
-        break
-    except Exception as e:
-        print(f"  attempt {attempt+1} failed: {e}")
-        if attempt < 2:
-            time.sleep(30)
-        else:
-            print("  giving up")
-            exit(1)
+result = json.loads(fetch_bytes_post(
+    "https://overpass-api.de/api/interpreter", data=data,
+    headers={"User-Agent": "laspalmas-intelligence/1.0", "Content-Type": "application/x-www-form-urlencoded"},
+    timeout=120
+))
 
 stops = []
 for e in result["elements"]:

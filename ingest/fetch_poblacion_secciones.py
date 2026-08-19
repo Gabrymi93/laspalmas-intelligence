@@ -4,9 +4,11 @@ Source: Indicadores demograficos. Secciones de Canarias (WFS, 2022-01-01)
 Output: parquet/poblacion/poblacion_secciones.parquet
 """
 import os
-import urllib.request
 import urllib.parse
 import pandas as pd
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from http_utils import fetch_bytes
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(BASE, "parquet", "poblacion")
@@ -34,7 +36,8 @@ url = (
     f"&propertyName={','.join(COLS)}"
     f"&cql_filter={urllib.parse.quote(cql)}"
 )
-urllib.request.urlretrieve(url, TMP)
+with open(TMP, "wb") as f:
+    f.write(fetch_bytes(url))
 df = pd.read_csv(TMP)
 os.remove(TMP)
 

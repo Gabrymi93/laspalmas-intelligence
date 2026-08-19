@@ -72,4 +72,26 @@ for path, min_rows, max_year, label in checks:
         errors += 1
 
 print(f"\nResultado: {errors} errores")
+
+# --- Check HTTP: todos los scripts de ingest deben usar http_utils ---
+print("\n=== Coherencia HTTP (ingest) ===")
+ingest_dir = os.path.join(BASE, "ingest")
+for fn in sorted(os.listdir(ingest_dir)):
+    if not fn.endswith(".py") or fn == "http_utils.py":
+        continue
+    fp = os.path.join(ingest_dir, fn)
+    with open(fp) as f:
+        src = f.read()
+    # Debe importar http_utils
+    if "http_utils" not in src:
+        print(f"  ✗ {fn}: no importa http_utils (usa urllib/requests directo?)")
+        errors += 1
+        continue
+    # No debe usar urllib.request.urlopen ni requests.get directamente
+    if "urllib.request.urlopen" in src or "requests.get(" in src:
+        print(f"  ✗ {fn}: usa urllib/requests directo en vez de http_utils")
+        errors += 1
+        continue
+    print(f"  ✓ {fn}")
+
 sys.exit(1 if errors else 0)

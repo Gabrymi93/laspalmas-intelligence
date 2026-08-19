@@ -6,9 +6,11 @@ Output: parquet/geografia/callejero_lpgc.parquet
 """
 import os
 import json
-import requests
 import pandas as pd
 import re
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from http_utils import fetch_json
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(BASE, "parquet", "geografia")
@@ -33,9 +35,7 @@ while True:
         "resultRecordCount": limit,
     }
     try:
-        resp = requests.get(QUERY_URL, params=params, timeout=60)
-        resp.raise_for_status()
-        data = resp.json()
+        data = fetch_json(QUERY_URL, params=params, timeout=60)
     except Exception as e:
         print(f"  x Error at offset {offset}: {e}")
         break

@@ -9,6 +9,7 @@ Source: ISTAC:E58028A_000005 v2.62 (actualizado 2026-07-14)
 Output: parquet/economia/empresas_lpgc.parquet
 """
 import os
+import pandas as pd
 import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from http_utils import get_csv_df

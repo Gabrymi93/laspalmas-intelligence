@@ -6,6 +6,7 @@ Sources:
 Output: parquet/economia/
 """
 import os
+import pandas as pd
 import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from http_utils import get_csv_df

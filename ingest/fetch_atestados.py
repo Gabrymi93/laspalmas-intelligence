@@ -6,6 +6,9 @@ Output: parquet/movilidad/atestados_{acc,her,veh}.parquet
 """
 import os
 import pandas as pd
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from http_utils import get_csv_df
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(BASE, "parquet", "movilidad")
@@ -16,7 +19,7 @@ YEARS = list(range(1998, 2017))
 
 def load_csv(url, label):
     try:
-        df = pd.read_csv(url, encoding="latin1")
+        df = get_csv_df(url, encoding="latin1")
         print(f"  {label}: {len(df)} rows", flush=True)
         return df
     except Exception as e:
