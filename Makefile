@@ -16,54 +16,56 @@ $(VENV):
 venv: $(VENV)
 
 # ETL targets — each downloads raw data and converts to Parquet
-# Using "-k" or "|| true" so one failure doesn't block the rest
+# Failures propagate: if a dataset is broken, validate catches it
 refresh: population employment urbanismo tourism gtfs renta atestados \
          geografia poblacion_secciones sitycleta gtfs_stops empresas autonomos callejero aire
 
 population: venv
-	$(PYTHON) ingest/istac_population.py && $(PYTHON) bin/csv2parquet.py || echo "⚠ population: fallo, se continua"
+	$(PYTHON) ingest/istac_population.py
+	$(PYTHON) bin/csv2parquet.py
 
 employment: venv
-	$(PYTHON) ingest/istac_employment.py && $(PYTHON) bin/csv2parquet.py || echo "⚠ employment: fallo, se continua"
+	$(PYTHON) ingest/istac_employment.py
+	$(PYTHON) bin/csv2parquet.py
 
 urbanismo: venv
-	$(PYTHON) ingest/fetch_urbanismo_sitcan.py || echo "⚠ urbanismo: fallo, se continua"
+	$(PYTHON) ingest/fetch_urbanismo_sitcan.py
 
 tourism: venv
-	$(PYTHON) ingest/fetch_tourism.py || echo "⚠ tourism: fallo, se continua"
+	$(PYTHON) ingest/fetch_tourism.py
 
 gtfs: venv
-	$(PYTHON) ingest/fetch_gtfs.py || echo "⚠ gtfs: fallo, se continua"
+	$(PYTHON) ingest/fetch_gtfs.py
 
 renta: venv
-	$(PYTHON) ingest/istac_renta.py || echo "⚠ renta: fallo, se continua"
+	$(PYTHON) ingest/istac_renta.py
 
 atestados: venv
-	$(PYTHON) ingest/fetch_atestados.py || echo "⚠ atestados: fallo, se continua"
+	$(PYTHON) ingest/fetch_atestados.py
 
 geografia: venv
-	$(PYTHON) ingest/fetch_geografia_wfs.py || echo "⚠ geografia: fallo, se continua"
+	$(PYTHON) ingest/fetch_geografia_wfs.py
 
 poblacion_secciones: venv
-	$(PYTHON) ingest/fetch_poblacion_secciones.py || echo "⚠ poblacion_secciones: fallo, se continua"
+	$(PYTHON) ingest/fetch_poblacion_secciones.py
 
 sitycleta: venv
-	$(PYTHON) ingest/fetch_sitycleta.py || echo "⚠ sitycleta: fallo, se continua"
+	$(PYTHON) ingest/fetch_sitycleta.py
 
 gtfs_stops: venv
-	$(PYTHON) ingest/fetch_gtfs_stops.py || echo "⚠ gtfs_stops: fallo, se continua"
+	$(PYTHON) ingest/fetch_gtfs_stops.py
 
 empresas: venv
-	$(PYTHON) ingest/istac_empresas.py || echo "⚠ empresas: fallo, se continua"
+	$(PYTHON) ingest/istac_empresas.py
 
 autonomos: venv
-	$(PYTHON) ingest/istac_autonomos.py || echo "⚠ autonomos: fallo, se continua"
+	$(PYTHON) ingest/istac_autonomos.py
 
 callejero: venv
-	$(PYTHON) ingest/fetch_callejero.py || echo "⚠ callejero: fallo, se continua"
+	$(PYTHON) ingest/fetch_callejero.py
 
 aire: venv
-	$(PYTHON) ingest/fetch_calidad_aire.py || echo "⚠ aire: fallo, se continua"
+	$(PYTHON) ingest/fetch_calidad_aire.py
 
 # Analysis
 queries: venv

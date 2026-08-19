@@ -22,23 +22,28 @@ jobs:
 
       - name: Refresh estable (ISTAC, SITCAN, WFS)
         run: make population employment renta urbanismo geografia poblacion_secciones
+        continue-on-error: true
 
       - name: Refresh económico (empresas, autónomos)
         run: make empresas autonomos
+        continue-on-error: true
 
       - name: Refresh movilidad
         run: make atestados gtfs sitycleta gtfs_stops
+        continue-on-error: true
 
       - name: Refresh turismo
         run: make tourism
+        continue-on-error: true
 
       - name: Validar datasets
-        run: make validate
-
-      - name: Resumen
-        run: make status
+        id: validate
+        run: |
+          make validate
+          echo "valid=true" >> $GITHUB_OUTPUT
 
       - name: Commit cambios
+        if: steps.validate.outputs.valid == 'true'
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
@@ -47,7 +52,7 @@ jobs:
           git push
 
       - name: Notificar fallo
-        if: failure()
+        if: failure() || steps.validate.outputs.valid != 'true'
         uses: actions/github-script@v7
         with:
           script: |
