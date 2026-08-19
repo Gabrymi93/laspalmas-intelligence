@@ -8,8 +8,9 @@ Combina due fonti complementari:
 Output: parquet/economia/autonomos_lpgc.parquet
 """
 import os
-import pandas as pd
-import requests
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from http_utils import get_csv_df
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(BASE, "parquet", "economia")
@@ -22,10 +23,7 @@ MUNI = "35016"
 def download_csv(url, name):
     print(f"[{name}] downloading...", flush=True)
     try:
-        resp = requests.get(url, timeout=120)
-        resp.raise_for_status()
-        resp.encoding = "utf-8"
-        return pd.read_csv(pd.io.common.StringIO(resp.text), dtype={"LUGAR_COTIZACION_CODE": str})
+        return get_csv_df(url, dtype={"LUGAR_COTIZACION_CODE": str})
     except Exception as e:
         print(f"  x {e}")
         return None

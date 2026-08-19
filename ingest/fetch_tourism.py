@@ -9,8 +9,9 @@ Sources:
 Output: parquet/turismo/
 """
 import os
-import pandas as pd
-import requests
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from http_utils import get_csv_df
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(BASE, "parquet", "turismo")
@@ -21,11 +22,7 @@ ISTAC_API = "https://datos.canarias.es/api/estadisticas/statistical-resources/v1
 def download_csv(url, name):
     print(f"[{name}] Downloading...", flush=True)
     try:
-        resp = requests.get(url, timeout=120)
-        resp.raise_for_status()
-        from io import StringIO
-        resp.encoding = "utf-8"  # server reports ISO-8859-1 but actual is UTF-8
-        df = pd.read_csv(StringIO(resp.text))
+        df = get_csv_df(url)
         print(f"  -> {len(df)} rows", flush=True)
         return df
     except Exception as e:

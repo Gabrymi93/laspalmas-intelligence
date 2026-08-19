@@ -9,8 +9,9 @@ Source: ISTAC:E58028A_000005 v2.62 (actualizado 2026-07-14)
 Output: parquet/economia/empresas_lpgc.parquet
 """
 import os
-import pandas as pd
-import requests
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from http_utils import get_csv_df
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(BASE, "parquet", "economia")
@@ -23,10 +24,7 @@ print("\n=== Empresas por estrato de asalariados (2012-2026) ===")
 print("Downloading...", flush=True)
 
 try:
-    resp = requests.get(CSV_URL, timeout=120)
-    resp.raise_for_status()
-    resp.encoding = "utf-8"
-    df = pd.read_csv(pd.io.common.StringIO(resp.text))
+    df = get_csv_df(CSV_URL)
 except Exception as e:
     print(f"  x Download failed: {e}")
     exit(1)
