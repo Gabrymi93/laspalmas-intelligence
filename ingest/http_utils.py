@@ -11,8 +11,8 @@ import urllib.error
 import pandas as pd
 import requests
 
-MAX_RETRIES = 5
-BASE_DELAY = 2  # seconds
+MAX_RETRIES = 3
+BASE_DELAY = 1  # seconds
 
 
 def fetch_text(url, encoding="utf-8", max_retries=MAX_RETRIES, delay=BASE_DELAY):
