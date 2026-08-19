@@ -5,11 +5,13 @@ Sources:
   - Indicadores demográficos: 2008-2022 (direct CSV download)
 Output: parquet/poblacion/
 """
-import urllib.request
 import csv
 import json
 import os
 import io
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from http_utils import fetch_text
 
 LPGC = "35016"
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,8 +21,7 @@ os.makedirs(OUT, exist_ok=True)
 # --- 1. Population time series 1986-2026 ---
 print("[1/2] Downloading population time series (C00025A_000002)...")
 url_pop = "https://datos.canarias.es/api/estadisticas/statistical-resources/v1.0/datasets/ISTAC/C00025A_000002/1.4.csv"
-response = urllib.request.urlopen(url_pop)
-content = response.read().decode("utf-8")
+content = fetch_text(url_pop)
 
 rows = []
 reader = csv.DictReader(io.StringIO(content))
@@ -47,8 +48,7 @@ with open(os.path.join(OUT, "poblacion_serie_historica.csv"), "w") as f:
 # --- 2. Demographic indicators 2008-2022 ---
 print("[2/2] Downloading indicadores demograficos...")
 url_ind = "https://datos.canarias.es/catalogos/estadisticas/dataset/d2fd1aef-2228-4072-917c-f511eeeadc80/resource/343a77f8-c987-43a1-b717-47248720358b/download/2008-2022_indicadores_demograficos_municipios_pmh.csv"
-response = urllib.request.urlopen(url_ind)
-content = response.read().decode("utf-8")
+content = fetch_text(url_ind)
 
 rows = []
 reader = csv.DictReader(io.StringIO(content))

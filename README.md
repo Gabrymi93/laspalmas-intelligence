@@ -11,7 +11,7 @@ Repositorio OSINT para centralizar datos HVD de **Las Palmas de Gran Canaria**.
 make venv          # entorno virtual
 make refresh       # descargar datos
 make validate      # validar integridad
-make queries       # ejecutar 41 consultas
+make queries       # ejecutar 44 consultas
 make status        # resumen de datasets
 make all           # todo lo anterior
 ```
@@ -43,6 +43,5 @@ make all           # todo lo anterior
 ## Pendiente
 
 - Centros educativos (ISTAC, geolocalizados)
-- Sensores calidad del aire (Ayto LPGC, live)
 - Analítica urbana (conteo mercados)
 - Eurostat NUTS-3 contexto provincial (ES704)

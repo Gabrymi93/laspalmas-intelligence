@@ -31,6 +31,9 @@ datasets = [
     ("empresas_lpgc", "parquet/economia/empresas_lpgc.parquet"),
     ("autonomos_lpgc", "parquet/economia/autonomos_lpgc.parquet"),
     ("callejero_lpgc", "parquet/geografia/callejero_lpgc.parquet"),
+    ("calidad_aire_gemelo", "parquet/ambiente/calidad_aire_gemelo.parquet"),
+    ("calidad_aire_estaciones", "parquet/ambiente/calidad_aire_estaciones.parquet"),
+    ("calidad_aire_estaciones_geo", "parquet/ambiente/calidad_aire_estaciones_geo.parquet"),
 ]
 
 print("=== datasets ===")

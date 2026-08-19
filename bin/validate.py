@@ -34,6 +34,9 @@ checks = [
     ("parquet/turismo/pernottamenti_gran_canaria.parquet", 100, 2026, "turismo_pernottamenti"),
     ("parquet/turismo/spesa_turistica_paesi.parquet", 50, 2017, "turismo_spesa"),
     ("parquet/geografia/callejero_lpgc.parquet", 5000, 2026, "callejero"),
+    ("parquet/ambiente/calidad_aire_gemelo.parquet", 5000, 2026, "aire_gemelo"),
+    ("parquet/ambiente/calidad_aire_estaciones.parquet", 50000, 2026, "aire_estaciones"),
+    ("parquet/ambiente/calidad_aire_estaciones_geo.parquet", 4, 2026, "aire_estaciones_geo"),
 ]
 
 print("=== Validación de datasets ===")
