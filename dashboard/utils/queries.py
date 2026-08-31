@@ -182,6 +182,43 @@ def spesa_per_paese() -> pd.DataFrame:
         WHERE anno=(SELECT max(anno) FROM read_parquet('{_p('parquet/turismo/spesa_turistica_paesi.parquet')}')) AND paese!='Total'
         GROUP BY paese ORDER BY miliardi_eur DESC""")
 
+
+# ── Vivienda Vacacional ─────────────────────────────────────────────────
+
+def vivienda_vacacional_trend() -> pd.DataFrame:
+    return query(f"""SELECT TIME_PERIOD_CODE as periodo,
+        try_cast(REGEXP_EXTRACT(TIME_PERIOD_CODE, '(\\d{{4}})', 1) AS INTEGER) as anno,
+        try_cast(REGEXP_EXTRACT(TIME_PERIOD_CODE, 'M(\\d{{2}})', 1) AS INTEGER) as mes,
+        round(avg(CASE WHEN MEDIDAS_CODE='VIVIENDAS_VACACIONALES_DISPONIBLES' THEN OBS_VALUE END)) as viviendas_disp,
+        round(avg(CASE WHEN MEDIDAS_CODE='VIVIENDAS_VACACIONALES_RESERVADAS' THEN OBS_VALUE END)) as viviendas_reserv,
+        round(avg(CASE WHEN MEDIDAS_CODE='PLAZAS_DISPONIBLES' THEN OBS_VALUE END)) as plazas_disp,
+        round(avg(CASE WHEN MEDIDAS_CODE='ESTANCIA_MEDIA_VIVIENDA_VACACIONAL' THEN OBS_VALUE END), 2) as estancia_media,
+        round(avg(CASE WHEN MEDIDAS_CODE='INGRESOS_TOTALES' THEN OBS_VALUE END), 0) as ingresos,
+        round(avg(CASE WHEN MEDIDAS_CODE='TASA_VIVIENDA_RESERVADA' THEN OBS_VALUE END), 1) as tasa_reserva
+        FROM read_parquet('{_p('parquet/turismo/vivienda_vacacional_lpgc.parquet')}')
+        WHERE INTERVALOS_PLAZAS_CODE='_T' AND TIME_PERIOD_CODE IS NOT NULL AND TIME_PERIOD_CODE!=''
+        GROUP BY 1,2,3 ORDER BY 2,3""")
+
+
+def vivienda_vacacional_estacionalidad() -> pd.DataFrame:
+    return query(f"""WITH m AS (
+        SELECT try_cast(REGEXP_EXTRACT(TIME_PERIOD_CODE,'M(\\d{{2}})',1) AS INTEGER) as mes,
+            round(avg(CASE WHEN MEDIDAS_CODE='VIVIENDAS_VACACIONALES_DISPONIBLES' THEN OBS_VALUE END)) as viviendas_disp,
+            round(avg(CASE WHEN MEDIDAS_CODE='TASA_VIVIENDA_RESERVADA' THEN OBS_VALUE END),1) as tasa_reserva,
+            round(avg(CASE WHEN MEDIDAS_CODE='INGRESOS_TOTALES' THEN OBS_VALUE END),0) as ingresos
+        FROM read_parquet('{_p('parquet/turismo/vivienda_vacacional_lpgc.parquet')}')
+        WHERE INTERVALOS_PLAZAS_CODE='_T' GROUP BY 1)
+        SELECT mes,
+            CASE mes WHEN 1 THEN 'Ene' WHEN 2 THEN 'Feb' WHEN 3 THEN 'Mar'
+            WHEN 4 THEN 'Abr' WHEN 5 THEN 'May' WHEN 6 THEN 'Jun'
+            WHEN 7 THEN 'Jul' WHEN 8 THEN 'Ago' WHEN 9 THEN 'Sep'
+            WHEN 10 THEN 'Oct' WHEN 11 THEN 'Nov' WHEN 12 THEN 'Dic' END as mes_label,
+            round(avg(viviendas_disp)) as viviendas_media,
+            round(avg(tasa_reserva),1) as reserva_media,
+            round(avg(ingresos),0) as ingresos_media
+        FROM m GROUP BY 1 ORDER BY 1""")
+
+
 # ── Movilidad ────────────────────────────────────────────────────────────
 
 def accidentes_evolucion() -> pd.DataFrame:

@@ -1,6 +1,7 @@
 """
 Fetch atestados from Wayback Machine (ODS format).
-Missing years: 2000-2001, 2006-2011, 2015-2016
+Missing years: 2000-2001, 2006, 2010-2011, 2014-2016
+Note: Uses requests directly (Wayback Machine is not covered by http_utils).
 """
 import os
 import requests
@@ -8,9 +9,6 @@ import pandas as pd
 from odf.opendocument import load
 from odf.table import Table, TableRow, TableCell
 from odf.text import P
-import sys
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from http_utils import get_csv_df
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(BASE, "parquet", "movilidad")
