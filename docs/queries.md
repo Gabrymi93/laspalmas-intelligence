@@ -1,4 +1,4 @@
-# Consultas SQL (44)
+# Consultas SQL (46)
 
 Todas las consultas están en `sql/` y se ejecutan con `make queries`.
 
@@ -32,13 +32,15 @@ Todas las consultas están en `sql/` y se ejecutan con `make queries`.
 | 017 | `017_gtfs_sitycleta.sql` | Complementariedad guaguas × Sitycleta |
 | 018 | `018_incidentes_paro_temporal.sql` | Comparación temporal accidentes ↔ desempleo |
 
-## Turismo (020-023)
+## Turismo (020-023, 045-046)
 | # | Archivo | Descripción |
 |---|---------|-------------|
 | 020 | `020_turismo_occupazione_hotel.sql` | Ocupación hotelera LPGC por categoría |
 | 021 | `021_turismo_pernottamenti.sql` | Pernoctaciones mensuales Gran Canaria |
 | 022 | `022_turismo_spesa_paesi.sql` | Gasto turístico por país de origen |
 | 023 | `023_estacionalidad_turistica.sql` | Estacionalidad turística (perfil mensual) |
+| 045 | `045_vivienda_vacacional_trend.sql` | Evolución mensual viviendas vacacionales LPGC |
+| 046 | `046_vivienda_vacacional_estacionalidad.sql` | Perfil estacional viviendas vacacionales |
 
 ## Economía (015, 019, 026-029, 034, 039)
 | # | Archivo | Descripción |

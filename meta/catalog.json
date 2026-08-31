@@ -3,9 +3,9 @@
   "municipio": "Las Palmas de Gran Canaria",
   "codigo_ine": "35016",
   "nuts3": "ES704",
-  "ultima_actualizacion": "2026-08-13",
-  "total_datasets": 29,
-  "total_queries": 44,
+  "ultima_actualizacion": "2026-08-31",
+  "total_datasets": 30,
+  "total_queries": 46,
   "total_ingest_scripts": 15,
   "catalogos_api": {
     "laspalmasgc": "http://apidatosabiertos.laspalmasgc.es/api/3/action (CKAN DataStore)",
@@ -67,7 +67,14 @@
       "url_csv": "https://datos.canarias.es/api/estadisticas/statistical-resources/v1.0/datasets/ISTAC/C00025A_000002/1.4.csv",
       "granularity": "municipio",
       "years": "1986-2026",
-      "measures": ["POBLACION", "POBLACION_HOMBRES", "POBLACION_MUJERES", "POBLACION_NACIONAL", "POBLACION_EXTRANJERA", "POBLACION_VA"],
+      "measures": [
+        "POBLACION",
+        "POBLACION_HOMBRES",
+        "POBLACION_MUJERES",
+        "POBLACION_NACIONAL",
+        "POBLACION_EXTRANJERA",
+        "POBLACION_VA"
+      ],
       "updated": "2026-07-15"
     },
     "indicatori_demografici": {
@@ -77,7 +84,17 @@
       "url_csv": "https://datos.canarias.es/catalogos/estadisticas/dataset/d2fd1aef-2228-4072-917c-f511eeeadc80/resource/343a77f8-c987-43a1-b717-47248720358b/download/2008-2022_indicadores_demograficos_municipios_pmh.csv",
       "granularity": "municipio",
       "years": "2008-2022",
-      "measures": ["poblacion", "poblacion_hombres", "poblacion_mujeres", "poblacion_00a14", "poblacion_15a64", "poblacion_65mas", "poblacion_extranjera", "poblacion_nacida_canarias", "poblacion_nacida_extranjero"],
+      "measures": [
+        "poblacion",
+        "poblacion_hombres",
+        "poblacion_mujeres",
+        "poblacion_00a14",
+        "poblacion_15a64",
+        "poblacion_65mas",
+        "poblacion_extranjera",
+        "poblacion_nacida_canarias",
+        "poblacion_nacida_extranjero"
+      ],
       "updated": "2023-03-16"
     },
     "guaguas_gtfs": {
@@ -141,7 +158,13 @@
       "title": "Distribución de la renta bruta media por persona según fuente de ingresos. Municipios",
       "granularity": "municipio",
       "years": "2015-2023",
-      "measures": ["SUELDOS_SALARIOS", "PENSIONES", "PRESTACIONES_DESEMPLEO", "OTROS_INGRESOS", "OTRAS_PRESTACIONES"],
+      "measures": [
+        "SUELDOS_SALARIOS",
+        "PENSIONES",
+        "PRESTACIONES_DESEMPLEO",
+        "OTROS_INGRESOS",
+        "OTRAS_PRESTACIONES"
+      ],
       "note": "Porcentaje de composición de la renta por fuente",
       "updated": "2026-07-15"
     },
@@ -151,7 +174,13 @@
       "title": "Distribución de la renta bruta media por persona según fuente de ingresos. Secciones censales",
       "granularity": "seccion censal",
       "years": "2015-2023",
-      "measures": ["SUELDOS_SALARIOS", "PENSIONES", "PRESTACIONES_DESEMPLEO", "OTROS_INGRESOS", "OTRAS_PRESTACIONES"],
+      "measures": [
+        "SUELDOS_SALARIOS",
+        "PENSIONES",
+        "PRESTACIONES_DESEMPLEO",
+        "OTROS_INGRESOS",
+        "OTRAS_PRESTACIONES"
+      ],
       "note": "281 secciones en LPGC, 5 distritos. Mismas medidas que municipio",
       "updated": "2026-07-15"
     },
@@ -161,7 +190,13 @@
       "title": "Indicadores laborales por distritos de Canarias",
       "granularity": "distrito",
       "years": "2022",
-      "measures": ["pact_t", "pocu_t", "ppar_t", "tpar_t", "psal_t"],
+      "measures": [
+        "pact_t",
+        "pocu_t",
+        "ppar_t",
+        "tpar_t",
+        "psal_t"
+      ],
       "note": "5 distritos LPGC. Geometría + indicadores laborales",
       "updated": "2026"
     },
@@ -171,7 +206,12 @@
       "title": "Indicadores laborales por barrios de Canarias",
       "granularity": "barrio",
       "years": "2024",
-      "measures": ["pact_t", "pocu_t", "ppar_t", "tpar_t"],
+      "measures": [
+        "pact_t",
+        "pocu_t",
+        "ppar_t",
+        "tpar_t"
+      ],
       "note": "121 barrios LPGC. Geometría + indicadores laborales",
       "updated": "2026"
     },
@@ -190,7 +230,12 @@
       "title": "Localización de estaciones de préstamo de bicicletas",
       "granularity": "estacion",
       "years": "2018",
-      "measures": ["Nombre", "Calle", "Latitud", "Longitud"],
+      "measures": [
+        "Nombre",
+        "Calle",
+        "Latitud",
+        "Longitud"
+      ],
       "note": "11 estaciones historicas. Datos 2026 no descargables (ckan interno)",
       "updated": "2018"
     },
@@ -200,7 +245,17 @@
       "title": "Indicadores demográficos por secciones censales de Canarias",
       "granularity": "seccion censal",
       "years": "2022",
-      "measures": ["poblacion", "poblacion_hombres", "poblacion_mujeres", "poblacion_00a14", "poblacion_15a64", "poblacion_65mas", "poblacion_extranjera", "poblacion_nacida_canarias", "superficie"],
+      "measures": [
+        "poblacion",
+        "poblacion_hombres",
+        "poblacion_mujeres",
+        "poblacion_00a14",
+        "poblacion_15a64",
+        "poblacion_65mas",
+        "poblacion_extranjera",
+        "poblacion_nacida_canarias",
+        "superficie"
+      ],
       "note": "275 secciones LPGC. Permite normalizar renta per capita",
       "updated": "2026"
     },
@@ -210,7 +265,16 @@
       "title": "Atestados Policía Local — Accidentes con lesividad",
       "granularity": "accidente",
       "years": "1998-2016",
-      "measures": ["DILIG", "LUGAR", "FECHA", "HORA", "VEHICULOS", "HERIDOS", "DESTINO", "COLISION"],
+      "measures": [
+        "DILIG",
+        "LUGAR",
+        "FECHA",
+        "HORA",
+        "VEHICULOS",
+        "HERIDOS",
+        "DESTINO",
+        "COLISION"
+      ],
       "note": "76.178 accidentes, 45.488 heridos, 148.650 vehículos. Vinculados por DILIG",
       "updated": "2016"
     },
@@ -220,7 +284,16 @@
       "title": "Sensores propios de calidad del aire (Gemelo Digital)",
       "granularity": "sensor",
       "years": "2026-05 → 2026-07",
-      "measures": ["PM2_5", "PM_10", "co2", "temperatura", "humedad", "presion", "iaq_index", "tvoc"],
+      "measures": [
+        "PM2_5",
+        "PM_10",
+        "co2",
+        "temperatura",
+        "humedad",
+        "presion",
+        "iaq_index",
+        "tvoc"
+      ],
       "note": "4 sensores (IOT-005-001..004) en Mercado Central y Mercado Puerto. ~7.700 lecturas. Valores crudos sin factor de escala",
       "updated": "2026-07-21"
     },
@@ -230,7 +303,13 @@
       "title": "Sensores del Gobierno de Canarias (calidad del aire)",
       "granularity": "estacion x parametro",
       "years": "2025-07 → 2026-05",
-      "measures": ["nombreEstacion", "nombreParametro", "valorTexto", "valorNumerico", "Fecha"],
+      "measures": [
+        "nombreEstacion",
+        "nombreParametro",
+        "valorTexto",
+        "valorNumerico",
+        "Fecha"
+      ],
       "note": "4 estaciones, 7 parámetros (NO2, O3, SO2, PM10, PM2,5), formato largo. ~118.840 lecturas. Incluye clasificacion valor_texto",
       "updated": "2026-07-03"
     },
@@ -239,9 +318,31 @@
       "id": "2e0a921f-aed9-4357-a4af-4dd6728b26c1",
       "title": "Ubicación de las estaciones de calidad del aire",
       "granularity": "estacion",
-      "measures": ["OBJECTID", "Nombre", "lat", "lon"],
+      "measures": [
+        "OBJECTID",
+        "Nombre",
+        "lat",
+        "lon"
+      ],
       "note": "4 estaciones geolocalizadas. Fuente ArcGIS FeatureServer EstacionesCalidadAire",
       "updated": "2026-08-13"
+    },
+    "vivienda_vacacional": {
+      "source": "istac",
+      "id": "C00065A_000061",
+      "title": "Viviendas vacacionales, plazas, tasas de ocupación, estancia media e ingresos",
+      "granularity": "municipio",
+      "years": "2019-2026",
+      "measures": [
+        "VIVIENDAS_VACACIONALES_DISPONIBLES",
+        "VIVIENDAS_VACACIONALES_RESERVADAS",
+        "TASA_VIVIENDA_RESERVADA",
+        "PLAZAS_DISPONIBLES",
+        "ESTANCIA_MEDIA_VIVIENDA_VACACIONAL",
+        "INGRESOS_TOTALES"
+      ],
+      "note": "540 registros (90 meses x 6 medidas). LPGC 35016.",
+      "updated": "2026-08-31"
     }
   }
 }

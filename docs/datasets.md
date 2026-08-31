@@ -15,6 +15,7 @@
 | Turismo | Ocupación hotelera | 45 | 2009-2023 | LPGC + categoría | ISTAC |
 | Turismo | Pernoctaciones | 197 | 2010-2026 | Gran Canaria, mensual | ISTAC |
 | Turismo | Gasto turístico | 96 | 2010-2017 | Canarias, por país | ISTAC |
+| Turismo | Vivienda vacacional | 540 | 2019-2026 | LPGC, mensual | ISTAC |
 | Economía | Renta bruta por municipio | 45 | 2015-2023 | LPGC por fuente | ISTAC |
 | Economía | Renta bruta por sección censal | 12.395 | 2015-2023 | 281 secciones LPGC | ISTAC |
 | Economía | Empresas por estrato asalariados | 605 | 2012-2026 | LPGC, mensual | ISTAC |
@@ -33,6 +34,6 @@
 | Ambiente | Calidad aire: estaciones Gob. de Canarias | 118.840 | 2025-07 → 2026-05 | estación × parámetro | Ayto LPGC |
 | Ambiente | Ubicación estaciones calidad del aire | 4 | 2026 | estación (lat/lon) | Ayto LPGC |
 
-**Total**: 29 datasets, ~570K registros.
+**Total**: 30 datasets, ~575K registros.
 
 > Nota: los valores numéricos son lecturas crudas del sensor (sin factor de escala, pueden incluir negativos).

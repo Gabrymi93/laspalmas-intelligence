@@ -1,6 +1,6 @@
 .PHONY: all refresh population employment urbanismo tourism gtfs \
         renta atestados geografia poblacion_secciones sitycleta gtfs_stops \
-        empresas autonomos callejero aire \
+        empresas autonomos callejero aire vivienda \
         queries status validate venv dashboard
 
 VENV = .venv
@@ -66,6 +66,10 @@ callejero: venv
 
 aire: venv
 	$(PYTHON) ingest/fetch_calidad_aire.py
+
+vivienda: venv
+	$(PYTHON) ingest/istac_vivienda_vacacional.py
+	$(PYTHON) bin/csv2parquet.py
 
 # Analysis
 queries: venv
