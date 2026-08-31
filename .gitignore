@@ -12,3 +12,6 @@ tmp/
 
 # Note interne
 _local/
+
+# Streamlit
+dashboard/.streamlit/secrets.toml

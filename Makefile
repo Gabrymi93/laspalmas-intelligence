@@ -1,7 +1,7 @@
 .PHONY: all refresh population employment urbanismo tourism gtfs \
         renta atestados geografia poblacion_secciones sitycleta gtfs_stops \
         empresas autonomos callejero aire \
-        queries status validate venv
+        queries status validate venv dashboard
 
 VENV = .venv
 PYTHON = $(VENV)/bin/python3
@@ -76,3 +76,7 @@ validate: venv
 
 status: venv
 	$(PYTHON) bin/run_status.py
+
+# Dashboard
+dashboard: venv
+	$(PYTHON) -m streamlit run dashboard/app.py --server.port 8501 --server.headless true

@@ -14,7 +14,29 @@ make validate      # validar integridad
 make queries       # ejecutar 44 consultas
 make status        # resumen de datasets
 make all           # todo lo anterior
+make dashboard     # lanzar dashboard Streamlit
 ```
+
+## Dashboard Streamlit
+
+Dashboard interactiva con 8 páginas que exploran los datos de LPGC:
+
+| Página | Contenido |
+|--------|-----------|
+| 🏙️ Resumen | KPIs generales, tendencia población, paro por sexo/distrito |
+| 👥 Demografía | Estructura de edad, envejecimiento, secciones censales |
+| 💼 Empleo | Paro por sexo/edad/barrio, brecha de género, paro juvenil |
+| 💰 Economía | Renta por distrito, empresas, autónomos, demanda coworking |
+| 🏨 Turismo | Ocupación hotelera, pernotaciones, gasto por país |
+| 🚌 Movilidad | Accidentes de tráfico, GTFS, Sitycleta |
+| 🌬️ Ambiente | Calidad del aire, estaciones, sensores Gemelo Digital |
+| 🗺️ Geografía | Mapa choropleth distritos, comparativa, callejero |
+
+```bash
+make dashboard     # o: .venv/bin/streamlit run dashboard/app.py
+```
+
+**Stack**: Streamlit + Plotly + Folium + DuckDB (lee Parquet directamente).
 
 ## Documentación
 
