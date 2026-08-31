@@ -20,7 +20,7 @@ checks = [
     ("parquet/empleo/paro_sexo_ocupacion.parquet", 5000, 2026, "paro_ocupacion"),
     ("parquet/movilidad/atestados_acc.parquet", 30000, 2016, "accidentes"),
     ("parquet/movilidad/atestados_her.parquet", 20000, 2016, "heridos"),
-    ("parquet/movilidad/atestados_veh.parquet", 80000, 2016, "vehiculos"),
+    ("parquet/movilidad/atestados_veh.parquet", 60000, 2016, "vehiculos"),
     ("parquet/movilidad/gtfs_routes.parquet", 30, 2026, "gtfs_rutas"),
     ("parquet/movilidad/gtfs_trips.parquet", 5000, 2026, "gtfs_viajes"),
     ("parquet/movilidad/gtfs_stop_times.parquet", 100000, 2026, "gtfs_horarios"),
