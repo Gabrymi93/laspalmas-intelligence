@@ -12,7 +12,7 @@ WITH base AS (
                        REGEXP_EXTRACT(FECHA, '(\d{1,2})/(\d{1,2})/(\d{4})', 1) AS DATE)) AS dia_semana,
         HERIDOS, COLISION
     FROM read_parquet('parquet/movilidad/atestados_acc.parquet')
-    WHERE year >= 2000 AND FECHA IS NOT NULL
+    WHERE year >= 2000 AND FECHA IS NOT NULL AND HORA IS NOT NULL AND HORA != ''
 )
 
 SELECT 'ACCIDENTES POR FRANJA HORARIA' AS seccion,
