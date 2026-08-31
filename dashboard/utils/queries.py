@@ -234,7 +234,7 @@ def accidentes_franja_horaria() -> pd.DataFrame:
         WHEN h BETWEEN 18 AND 23 THEN '18-24 noche'
         END AS franja, count(*) as accidentes, round(avg(HERIDOS),2) as media_heridos
         FROM (SELECT DILIG,HERIDOS,CAST(REGEXP_EXTRACT(HORA,'(\\d{{2}})',1) AS INTEGER) AS h
-        FROM read_parquet('{_p('parquet/movilidad/atestados_acc.parquet')}') WHERE year>=2000 AND HORA IS NOT NULL)
+        FROM read_parquet('{_p('parquet/movilidad/atestados_acc.parquet')}') WHERE year>=2000 AND HORA IS NOT NULL AND TRIM(HORA) != '')
         GROUP BY 1 ORDER BY 2 DESC""")
 
 def gtfs_paradas_map() -> pd.DataFrame:
