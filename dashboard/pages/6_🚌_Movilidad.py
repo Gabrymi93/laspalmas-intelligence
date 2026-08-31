@@ -38,7 +38,7 @@ st.divider()
 
 # ── Evolución accidentes (dual axis) ────────────────────────────────────
 st.subheader("📉 Evolución de accidentes de tráfico")
-st.warning("⚠️ Datos incompletos: solo disponibles 1998-1999, 2002-2005 y 2012-2014. Faltan 2000-2001, 2006-2011 y 2015-2016.")
+st.warning("⚠️ Datos de accidentes: 11 años disponibles (1998-1999, 2002-2005, 2007-2009, 2012-2013). Faltan 2000-2001, 2006, 2010-2011, 2014-2016. Fuente: Wayback Machine + datosabiertos.laspalmasgc.es")
 
 fig1 = go.Figure()
 fig1.add_trace(go.Bar(x=df_acc["year"], y=df_acc["accidentes"], name="Accidentes",
