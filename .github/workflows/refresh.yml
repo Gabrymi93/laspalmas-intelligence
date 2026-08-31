@@ -33,7 +33,7 @@ jobs:
         continue-on-error: true
 
       - name: Refresh turismo
-        run: make tourism
+        run: make tourism vivienda
         continue-on-error: true
 
       - name: Validar datasets
